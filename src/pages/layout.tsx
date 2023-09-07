@@ -7,15 +7,30 @@ import * as path from "path";
 const app = new Elysia().use(html());
 
 const pages = await fs.readdir("./src/pages");
+const routes = await fs.readdir("./src/routes");
 
-const createPageRoute = async (
-  pageName: string,
-  Page: any,
-  metadata: Metadata
-) => {
+const createPage = async (pageName: string, Page: any, metadata: Metadata) => {
   app.get(pageName === "index" ? "/" : `/${pageName}`, ({ html }: any) =>
     html(<BaseHtml children={Page()} metadata={metadata}></BaseHtml>)
   );
+};
+
+const createRoute = async (routeName: string, Route: Handler) => {
+  if (Route.GET) {
+    app.get(`/${routeName}`, () => Route.GET());
+  }
+  if (Route.POST) {
+    app.post(`/${routeName}`, () => Route.POST());
+  }
+  if (Route.PUT) {
+    app.put(`/${routeName}`, () => Route.PUT());
+  }
+  if (Route.PATCH) {
+    app.patch(`/${routeName}`, () => Route.PATCH());
+  }
+  if (Route.DELETE) {
+    app.delete(`/${routeName}`, () => Route.DELETE());
+  }
 };
 
 for (const page of pages) {
@@ -26,7 +41,19 @@ for (const page of pages) {
       `/home/olif/apps/beth-stack-test/src/pages/${pageName}.tsx`
     );
 
-    createPageRoute(pageName, Page, metadata);
+    createPage(pageName, Page, metadata);
+  }
+}
+
+for (const route of routes) {
+  if (route.endsWith(".tsx")) {
+    const routeName = path.parse(route).name;
+
+    const Handler: Handler = await import(
+      `/home/olif/apps/beth-stack-test/src/routes/${routeName}.tsx`
+    );
+
+    createRoute(routeName, Handler);
   }
 }
 

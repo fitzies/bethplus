@@ -6,12 +6,6 @@ To start
 bun create fitzies/bethplus
 ```
 
-To install dependencies:
-
-```bash
-bun install
-```
-
 To run:
 
 ```bash

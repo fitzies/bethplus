@@ -14,7 +14,6 @@
     "elysia": "^0.6.17"
   },
   "scripts": {
-    "devTest": "bun run --watch src/pages/index.tsx",
     "dev": "bun run --watch src/pages/layout.tsx"
   }
 }
