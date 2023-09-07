@@ -1,5 +1,10 @@
 import * as elements from "typed-html";
 
+export const metadata: Metadata = {
+  title: "Beth+ Stack",
+  description: "",
+};
+
 export function Page() {
   return (
     <div class="w-screen h-screen flex flex-col gap-4 justify-center items-center">
@@ -12,10 +17,10 @@ export function Page() {
       </p>
       <div class="flex justify-center items-center gap-3 my-8 font-bold">
         <h2>Counter (on the server): </h2>
-        <div hx-get="/counter" hx-trigger="load" id="count"></div>
+        <div hx-get="/api/counter" hx-trigger="load" id="count"></div>
         <button
           class="border border-gray-700 px-2 py-1 rounded-lg"
-          hx-post="/counter"
+          hx-post="/api/counter"
           hx-trigger="click"
           hx-swap="innerHTML"
           hx-target="#count"

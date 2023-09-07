@@ -1,5 +1,3 @@
-import * as elements from "typed-html";
-
 let counter = 0;
 
 export function GET() {

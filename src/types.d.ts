@@ -1,4 +1,6 @@
-type Metadata = { title: string; description: string } | undefined;
+type Metadata =
+  | { title: string; description: string; urlPrefix?: string }
+  | undefined;
 
 type Handler = {
   GET: Function;
@@ -6,4 +8,8 @@ type Handler = {
   PUT: Function;
   PATCH: Function;
   DELETE: Function;
+};
+
+type Routedata = {
+  slug: string;
 };

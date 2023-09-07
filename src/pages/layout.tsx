@@ -10,26 +10,32 @@ const pages = await fs.readdir("./src/pages");
 const routes = await fs.readdir("./src/routes");
 
 const createPage = async (pageName: string, Page: any, metadata: Metadata) => {
-  app.get(pageName === "index" ? "/" : `/${pageName}`, ({ html }: any) =>
-    html(<BaseHtml children={Page()} metadata={metadata}></BaseHtml>)
+  app.get(
+    pageName === "index"
+      ? "/"
+      : `${
+          metadata && metadata.urlPrefix ? `${metadata.urlPrefix}` : ""
+        }/${pageName}`,
+    ({ html }: any) =>
+      html(<BaseHtml children={Page()} metadata={metadata}></BaseHtml>)
   );
 };
 
 const createRoute = async (routeName: string, Route: Handler) => {
   if (Route.GET) {
-    app.get(`/${routeName}`, () => Route.GET());
+    app.get(`/api/${routeName}`, () => Route.GET());
   }
   if (Route.POST) {
-    app.post(`/${routeName}`, () => Route.POST());
+    app.post(`/api/${routeName}`, () => Route.POST());
   }
   if (Route.PUT) {
-    app.put(`/${routeName}`, () => Route.PUT());
+    app.put(`/api/${routeName}`, () => Route.PUT());
   }
   if (Route.PATCH) {
-    app.patch(`/${routeName}`, () => Route.PATCH());
+    app.patch(`/api/${routeName}`, () => Route.PATCH());
   }
   if (Route.DELETE) {
-    app.delete(`/${routeName}`, () => Route.DELETE());
+    app.delete(`/api/${routeName}`, () => Route.DELETE());
   }
 };
 
