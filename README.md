@@ -1,4 +1,10 @@
-# beth-stack-test
+# Beth+ Stack
+
+To start
+
+```bash
+bun create fitzies/bethplus
+```
 
 To install dependencies:
 
@@ -9,9 +15,5 @@ bun install
 To run:
 
 ```bash
-bun run index.ts
+npm run dev
 ```
-
-This project was created using `bun init` in bun v0.8.1. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
-# bethplus
-# bethplus
